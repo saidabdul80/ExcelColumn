@@ -43,11 +43,15 @@ function handleFileSelect(evt) {
     var sheet2name = document.getElementById("sheet2name").value;
     var column1 = document.getElementById("column1").value;
     var column2 = document.getElementById("column2").value;
+    var elt = document.querySelector("#fileToUpload");
     if(sheet1name == "" || sheet2name =="" || column1 == "" || column2 == ""){        
         alert("all field is required")
         return 0;
     }
-  var elt = document.querySelector("#fileToUpload");
+    if(elt.files.length < 2 || elt.files.length > 2){
+        alert("please upload only two excel files")
+        return 0;
+    }
     var file1 = elt.files[0]; // FileList object
     var file2 = elt.files[1]; // FileList object
     //file number is in other they are in destination;
@@ -75,7 +79,7 @@ function generate(){
     //console.log(results);
     var column1 = document.getElementById("column1").value;
     var column2 = document.getElementById("column2").value;
-    var rate = document.getElementById("rate").value;
+    var rate = document.getElementById("rate").value;    
     var wb = XLSX.utils.book_new();
     wb.Props = {
             Title: "Similar data Result by column "+ column1 +" & "+ column2,
